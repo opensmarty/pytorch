@@ -134,6 +134,11 @@ TEST(AutogradAPITests, RetainGrad) {
 
   // Gradient should be accumulated
   out.backward({}, /*keep_graph=*/true);
+  // yf225 TODO: figure out what's going on here!!!
+  std::cout << "yf225 TODO debug: input.grad(): " << input.grad() << std::endl;
+  std::cout << "yf225 TODO debug: h1.data(): " << h1.data() << std::endl;
+  std::cout << "yf225 TODO debug: h1.grad(): " << h1.grad() << std::endl;
+  std::cout << "yf225 TODO debug: h1.grad().data(): " << h1.grad().data() << std::endl;
   ASSERT_VARIABLE_EQ(h1.data() * 2, h1.grad().data());
   out.backward({}, /*keep_graph=*/true);
   ASSERT_VARIABLE_EQ(h1.data() * 4, h1.grad().data());
